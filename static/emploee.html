@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manager & Employee - Weerakkodi Super Store</title>
+</head>
+<body style="
+    margin: 0;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/istockphoto-1334821380-612x612.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+">
+
+<h1 style="
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+"> Manager & Employee Management - Weerakkodi Super Store</h1>
+
+<!-- MANAGER CARD -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    margin: 30px auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px black;
+">
+    <h2>👨‍💼 Add Manager</h2>
+    <input id="manager_id" placeholder="Manager ID" style="width: 100%; padding: 10px;"><br><br>
+    <input id="manager_name" placeholder="Manager Name" style="width: 100%; padding: 10px;"><br><br>
+    <input id="manager_contact" placeholder="Contact Info" style="width: 100%; padding: 10px;"><br><br>
+    <button onclick="addManager()" style="
+        width: 100%;
+        padding: 12px;
+        background-color: #2ecc71;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+    ">Add Manager</button>
+</div>
+
+<!-- EMPLOYEE CARD -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    margin: 30px auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px black;
+">
+    <h2>👷 Add Employee</h2>
+    <input id="employee_id" placeholder="Employee ID" style="width: 100%; padding: 10px;"><br><br>
+    <input id="employee_name" placeholder="Employee Name" style="width: 100%; padding: 10px;"><br><br>
+    <input id="employee_role" placeholder="Role / Position" style="width: 100%; padding: 10px;"><br><br>
+    <button onclick="addEmployee()" style="
+        width: 100%;
+        padding: 12px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+    ">Add Employee</button>
+</div>
+
+<!-- RESPONSE BOX -->
+<div id="response" style="text-align: center; margin-top: 20px; font-weight: bold;"></div>
+
+<script>
+    function showResponse(msg) {
+        document.getElementById("response").innerText = msg;
+    }
+
+    function addManager() {
+        const data = {
+            ManagerID: document.getElementById("manager_id").value,
+            Name: document.getElementById("manager_name").value,
+            Contact_Info: document.getElementById("manager_contact").value
+        };
+
+        fetch('/add_manager', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+          .then(data => showResponse(data.message || data.error));
+    }
+
+    function addEmployee() {
+        const data = {
+            EmployeeID: document.getElementById("employee_id").value,
+            Name: document.getElementById("employee_name").value,
+            Role: document.getElementById("employee_role").value
+        };
+
+        fetch('/add_employee', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+          .then(data => showResponse(data.message || data.error));
+    }
+</script>
+
+</body>
+</html>

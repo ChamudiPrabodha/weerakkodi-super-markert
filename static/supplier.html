@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Supplier Management - Weerakkodi Super Store</title>
+</head>
+<body style="
+    margin: 0;
+    padding: 40px;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/istockphoto-1334821380-612x612.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+">
+
+<h1 style="
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+">🚚 Supplier Management - Weerakkodi Super Store</h1>
+
+<!-- 🟦 Card: Add New Supplier -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    margin: 30px auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px black;
+">
+    <h2>➕ Add New Supplier</h2>
+    <input id="supplier_id" placeholder="Supplier ID" style="width: 100%; padding: 10px; margin-top: 10px;"><br><br>
+    <input id="supplier_name" placeholder="Supplier Name" style="width: 100%; padding: 10px;"><br><br>
+    <input id="supplier_contact" placeholder="Contact Info" style="width: 100%; padding: 10px;"><br><br>
+    <button onclick="addSupplier()" style="
+        width: 100%;
+        padding: 12px;
+        background-color: #2ecc71;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    ">Add Supplier</button>
+</div>
+
+<!-- 🟩 Card: Search / Update / Delete Supplier -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    margin: 30px auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px black;
+">
+    <h2>🔍 Search / Update / Delete Supplier</h2>
+    <input id="search_supplier_id" placeholder="Enter Supplier ID" style="width: 100%; padding: 10px;"><br><br>
+    <button onclick="getSupplier()">Get</button>
+    <button onclick="deleteSupplier()">Delete</button>
+    <br><br>
+    <input id="update_supplier_name" placeholder="New Name" style="width: 100%; padding: 10px;"><br><br>
+    <input id="update_supplier_contact" placeholder="New Contact" style="width: 100%; padding: 10px;"><br><br>
+    <button onclick="updateSupplier()" style="
+        width: 100%;
+        padding: 12px;
+        background-color: #f39c12;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    ">Update Supplier</button>
+</div>
+
+<!-- 🟨 Card: View All Suppliers -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 30px;
+    margin: 30px auto;
+    width: 500px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px black;
+">
+    <h2>📋 All Suppliers</h2>
+    <button onclick="getAllSuppliers()" style="
+        width: 100%;
+        padding: 12px;
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    ">Load All</button>
+    <ul id="supplier_list" style="padding-left: 0; list-style: none; margin-top: 20px;"></ul>
+</div>
+
+<!-- 🛠 Response Box -->
+<div id="response" style="text-align: center; margin-top: 30px; font-weight: bold;"></div>
+
+<script>
+    function showResponse(msg) {
+        document.getElementById("response").innerText = msg;
+    }
+
+    function addSupplier() {
+        const data = {
+            SupplierID: document.getElementById("supplier_id").value,
+            Name: document.getElementById("supplier_name").value,
+            Contact_Info: document.getElementById("supplier_contact").value
+        };
+        fetch('/add_supplier', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+          .then(data => showResponse(data.message || data.error));
+    }
+
+    function getSupplier() {
+        const id = document.getElementById("search_supplier_id").value;
+        fetch('/supplier/' + id)
+            .then(res => res.json())
+            .then(data => {
+                if (data.error) return showResponse(data.error);
+                document.getElementById("update_supplier_name").value = data.Name;
+                document.getElementById("update_supplier_contact").value = data.Contact_Info;
+                showResponse("✅ Supplier loaded.");
+            });
+    }
+
+    function updateSupplier() {
+        const id = document.getElementById("search_supplier_id").value;
+        const data = {
+            Name: document.getElementById("update_supplier_name").value,
+            Contact_Info: document.getElementById("update_supplier_contact").value
+        };
+        fetch('/supplier/' + id, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data)
+        }).then(res => res.json())
+          .then(data => showResponse(data.message || data.error));
+    }
+
+    function deleteSupplier() {
+        const id = document.getElementById("search_supplier_id").value;
+        fetch('/supplier/' + id, {
+            method: "DELETE"
+        }).then(res => res.json())
+          .then(data => showResponse(data.message || data.error));
+    }
+
+    function getAllSuppliers() {
+        fetch('/suppliers')
+            .then(res => res.json())
+            .then(data => {
+                const list = document.getElementById("supplier_list");
+                list.innerHTML = "";
+                data.forEach(s => {
+                    const li = document.createElement("li");
+                    li.innerText = `🆔 ${s.SupplierID} - ${s.Name} 📞 ${s.Contact_Info}`;
+                    list.appendChild(li);
+                });
+            });
+    }
+</script>
+
+</body>
+</html>

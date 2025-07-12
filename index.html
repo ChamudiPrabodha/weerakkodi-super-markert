@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weerakkodi Super Store</title>
+</head>
+<body style="
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('/static/istockphoto-1334821380-612x612.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+">
+
+<!-- 🔷 Navbar -->
+<div style="
+    background-color: rgba(0,0,0,0.7);
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+">
+    <h2 style="margin: 0; color: white;">Weerakkodi Super Store</h2>
+    <div>
+         <a href="login.html" style="text-decoration: none; color: inherit;">
+        <button onclick="alert('Login clicked')" style="margin-right: 10px; padding: 10px 20px; background-color: #2ecc71; border: none; border-radius: 5px; color: white; cursor: pointer;">Login</button>
+             <a href="logout.html" style="text-decoration: none; color: inherit;">
+        <button onclick="alert('Logout clicked')" style="padding: 10px 20px; background-color: #e74c3c; border: none; border-radius: 5px; color: white; cursor: pointer;">Logout</button>
+    </div>
+</div>
+
+<!-- 🔶 Page Header -->
+<h1 style="text-align: center; margin-top: 40px; color: #ffffff;">🏪 Welcome to Weerakkodi Super Store</h1>
+
+<!-- 🟢 Cards Section -->
+<div style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 50px;
+    gap: 30px;
+    padding: 20px;
+">
+
+    <!-- 🔸 Customer Card -->
+    <a href="customer.html" style="text-decoration: none; color: inherit;">
+    <div style="
+        width: 200px;
+        background-color: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        border: 1px solid #fff;
+        transition: transform 0.2s;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3>👤 Customer</h3>
+        <p>Manage customer profiles, purchases & history.</p>
+    </div>
+</a>
+<!-- 🟦 Supplier Card with Link -->
+<a href="http://localhost:63342/store/static/supplier.html?_ijt=m7j4bji7g3ldju40vkjmueq0am&_ij_reload=RELOAD_ON_SAVE" style="text-decoration: none; color: inherit;">
+    <div style="
+        width: 200px;
+        background-color: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        border: 1px solid #fff;
+        transition: transform 0.2s;
+        margin-bottom: 20px;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3>🚚 Supplier</h3>
+        <p>Manage supplier info & deliveries.</p>
+    </div>
+</a>
+<!-- 👷 Employee Card with Link -->
+<a href="http://localhost:63342/store/static/emploee.html?_ijt=akrmqfko6es7iqcfb7kc4casah&_ij_reload=RELOAD_ON_SAVE" style="text-decoration: none; color: inherit;">
+    <div style="
+        width: 200px;
+        background-color: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        border: 1px solid #fff;
+        transition: transform 0.2s;
+        margin-bottom: 20px;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3>👷 Employee</h3>
+        <p>Manage employee roles & details.</p>
+    </div>
+</a>
+
+
+   <!-- 🗃️ Item Card with Link -->
+<a href="http://localhost:63342/store/static/inventories.html?_ijt=rakns5ihbhu7boi1dq3c77lj36&_ij_reload=RELOAD_ON_SAVE" style="text-decoration: none; color: inherit;">
+    <div style="
+        width: 200px;
+        background-color: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(5px);
+        text-align: center;
+        border: 1px solid #fff;
+        transition: transform 0.2s;
+        margin-bottom: 20px;
+    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        <h3>📦 Item</h3>
+        <p>Track and update products in inventory.</p>
+    </div>
+</a>
+
+</div>
+
+</body>
+</html>
